@@ -1,0 +1,16 @@
+{
+    "name": "EmpireMillenniumChatBlockerChromeExt",
+    "version": "1.0",
+    "author": "Steven Flanders",
+    "description": "Block Abusive Chat Messages",
+    "permissions": ["activeTab", "declarativeContent", "storage", "*://*/* "],
+    "background": {
+      "scripts": ["js/background.js"],
+      "persistent": true
+    },
+    "browser_action": {
+      "default_title": "Block Chat Messages",
+      "default_popup": "html/main.html"
+    },
+    "manifest_version": 2
+}
