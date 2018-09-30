@@ -6,11 +6,19 @@ document.addEventListener("DOMContentLoaded", function() {
   setDebug(false);
   LOG('main.js init()');
 
+  // Add Page Events.
   document.getElementById('btnSave').addEventListener('click', saveData);
   document.getElementById('btnClear').addEventListener('click', clearData);
+  document.getElementById(SettingsKeys.ignoreText).addEventListener('keypress', function (e) {
+    var key = e.which || e.keyCode;
+    if (key === 13) { // 13 is enter
+      saveData();
+    }
+  });
 
   loadData();
 });
+
 
 function saveData() {
   saveSetting(SettingsKeys.ignoreText, document.getElementById(SettingsKeys.ignoreText).value);
