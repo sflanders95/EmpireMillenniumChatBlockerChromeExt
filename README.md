@@ -14,8 +14,10 @@ Click the "Load Unpacked" button and select the directory where the manifest.jso
 
 Now reload the [Empire Millennium Wars Game](https://empiremillenniumwars.com/ 'a goodgamesstudios crappy product').
 
-After installing the plugin, a new icon should have been created at the top right of the chrome window.  Hover over the buttons until you see "Block Chat Messages".  Click it.  Then enter the text or username you wish to no longer see in the chat window and click the "Save" button.
+After installing the plugin, a new icon <img src="images/Actions-process-stop-icon16.png" valign="middle"> should have been created at the top right of the chrome window.  The Hover text over the icon will say "Block Chat Messages".  Click it to get the settings window.  Enter the text or username you wish to no longer see in the chat window and click the "Save" button.
 
 To remove the text, click the "Erase" button.
+
+To regain the hidden messages, use Erase function then reload the game (press F5).
 
 \<EOF\>

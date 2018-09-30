@@ -14,6 +14,15 @@
       "default_popup": "html/main.html",
       "scripts": ["js/main.js"]
     },
+    "icons": {
+      "16": "images/Actions-process-stop-icon16.png",
+      "24": "images/Actions-process-stop-icon24.png",
+      "32": "images/Actions-process-stop-icon32.png",
+      "48": "images/Actions-process-stop-icon48.png",
+      "64": "images/Actions-process-stop-icon64.png",
+      "72": "images/Actions-process-stop-icon72.png",
+      "128": "images/Actions-process-stop-icon128.png"
+    },
     "content_scripts": [
       {
         "matches": ["file:///Users/*", 
