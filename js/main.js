@@ -3,7 +3,7 @@ var _DEBUG;
 
 // init
 document.addEventListener("DOMContentLoaded", function() {
-  _DEBUG = true;
+  setDebug(false);
   LOG('main.js init()');
 
   document.getElementById('btnSave').addEventListener('click', saveData);
@@ -26,15 +26,14 @@ function loadData() {
 function clearData()
 {
   document.getElementById("ignoreText").value = '';
-  document.getElementById("completelyHide").checked = false;
+  document.getElementById("completelyHide").checked = true;
   saveData();
 }
 
 function setDebug(isDebug)
 {
   _DEBUG = isDebug;
-  d = document.getElementById('DEBUG');
-  d.style.display = ((isDebug) ? "block" : "none");
+  document.getElementById('DEBUG').style.display = ((isDebug) ? "block" : "none");
 }
 function getDebug()
 {
