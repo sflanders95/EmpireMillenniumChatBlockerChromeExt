@@ -6,11 +6,21 @@
     "permissions": ["activeTab", "declarativeContent", "storage", "*://*/* "],
     "background": {
       "scripts": ["js/background.js"],
-      "persistent": true
+      "persistent": false,
+      "all_frames": true
     },
     "browser_action": {
       "default_title": "Block Chat Messages",
-      "default_popup": "html/main.html"
+      "default_popup": "html/main.html",
+      "scripts": ["js/main.js"]
     },
+    "content_scripts": [
+      {
+        "matches": ["file:///Users/*", 
+          "https://empiremillenniumwars.ggs-emw.com/*"],
+        "js": ["js/contentScript.js"],
+        "all_frames": true
+      }
+    ],
     "manifest_version": 2
 }

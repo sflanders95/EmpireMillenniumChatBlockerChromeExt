@@ -1,33 +1,84 @@
 'use strict';
-
-console.log('Empire Millennium chat blocker main.js opened');
+var _DEBUG;
 
 // init
-document.onload = function() {
-  chrome.storage.sync.get(['ignoreText', 'completelyHide'], function(result) {
-    if (!result) {
-      chrome.storage.sync.set({'ignoreText': '', 'completelyHide': false}, function() {
-        console.log('Empire Millennium chat blocker main.js: storage initialized.');
-      });
+document.addEventListener("DOMContentLoaded", function() {
+  _DEBUG = true;
+  LOG('main.js init()');
+
+  document.getElementById('btnSave').addEventListener('click', saveData);
+  document.getElementById('btnClear').addEventListener('click', clearData);
+
+  loadData();
+});
+
+function saveData() {
+  saveSetting(SettingsKeys.ignoreText, document.getElementById(SettingsKeys.ignoreText).value);
+  saveSetting(SettingsKeys.completelyHide, document.getElementById(SettingsKeys.completelyHide).checked);
+  loadData();
+}
+
+function loadData() {
+  getSetting(SettingsKeys.ignoreText, (val) => {document.getElementById(SettingsKeys.ignoreText).value = val;});
+  getSetting(SettingsKeys.completelyHide, (val) => {document.getElementById(SettingsKeys.completelyHide).checked = val;});
+}
+
+function clearData()
+{
+  document.getElementById("ignoreText").value = '';
+  document.getElementById("completelyHide").checked = false;
+  saveData();
+}
+
+function setDebug(isDebug)
+{
+  _DEBUG = isDebug;
+  d = document.getElementById('DEBUG');
+  d.style.display = ((isDebug) ? "block" : "none");
+}
+function getDebug()
+{
+  return _DEBUG;
+}
+
+/* BEGIN COMMON */
+var SettingsKeys = {ignoreText: 'ignoreText', completelyHide: 'completelyHide'};
+
+function saveSetting(lKey, lVal)
+{
+  chrome.storage.local.set({[lKey]: lVal} ); //, function(){} );
+}
+
+/* Usage:
+ *   getSetting('keyIdentifier', (val) => { do something with val; } ); 
+ */
+function getSetting(lKey, fn) 
+{
+  chrome.storage.local.get(lKey, (result) => {
+    if (result) {
+        LOG('getSetting('+lKey+'): '+ JSON.stringify(result) );
+        switch (lKey) {  /* Security Exception: cannot use: eval('result.'+SettingsKeys.ignoreText) */
+          case SettingsKeys.ignoreText:
+            fn(result.ignoreText); break;
+          case SettingsKeys.completelyHide:
+            fn(result.completelyHide); break;
+          default:
+            fn('');
+        }
     }
     else {
-      document.getElementByID("ignoreText").value = result.ignoreText;
-      document.getElementByID("completelyHide").checked = result.completelyHide;
+      LOG('Data retrieval failed');
+      fn('');
     }
   });
-};
-
-function save() {
-  chrome.storage.sync.set({'ignoreText': document.getElementByID("ignoreText").value,
-                           'completelyHide': document.getElementByID("completelyHide").checked},
-                           function() {
-      console.log('Empire Millennium chat blocker main.js: values saved.');
-  });
 }
 
-function clear()
-{
-  document.getElementByID("ignoreText").value = '';
-  document.getElementByID("completelyHide").checked = false;
-  this.save()
+function LOG(str) {
+  console.log('[BCM]: ' + str);
+  if (_DEBUG) {
+    var lEntry = document.createElement('div');
+    lEntry.innerText = str;
+    document.getElementById('LOG').appendChild(lEntry);
+  }
 }
+/* END COMMON */

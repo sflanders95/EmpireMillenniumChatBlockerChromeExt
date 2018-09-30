@@ -12,3 +12,7 @@ select::-moz-focus-inner,
 input[type="file"] > input[type="button"]::-moz-focus-inner {
   outline: none !important; }
 
+body { 
+  background-color: #C8C8C8; 
+  font-family: Arial, Helvetica, sans-serif;
+}
