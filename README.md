@@ -1,15 +1,18 @@
 # EmpireMillenniumChatBlockerChromeExt
-<img src="images/emwss.png" width="350" align="right">
+
+<img src="images/emwss.jpg" width="300" align="right">
 
 
 A Chrome Extension for the game Empire Millennium wars to block user chat messages.
 
 To Install:
 download all of the files retaining directory structure.  or use git clone:
+```sh
+git clone https://github.com/sflanders95/EmpireMillenniumChatBlockerChromeExt
+```
 
-  `git clone https://github.com/sflanders95/EmpireMillenniumChatBlockerChromeExt`
-
-Open Chrome and navigate to: [chrome://extensions/](chrome://extensions/)
+Open Chrome and navigate to: <!-- this link does not work on github [chrome://extensions/](chrome://extensions/) -->
+<A href="chrome://extensions/">chrome://extensions/</a>
 
 Turn Developer mode on: &nbsp; <img src="images/chromeDevModeOn.png" width="100" valign="middle">
 
@@ -24,3 +27,8 @@ To remove the text, click the "Erase" button.
 To regain the hidden messages, use Erase function then reload the game (press F5).
 
 \<EOF\>
+<style>
+.BoxShadow {
+    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.75);
+}
+</style>
