@@ -1,6 +1,7 @@
-<img src="images/emwss.png" width="300" align="right">
-
 # EmpireMillenniumChatBlockerChromeExt
+<img src="images/emwss.png" width="350" align="right">
+
+
 A Chrome Extension for the game Empire Millennium wars to block user chat messages.
 
 To Install:
