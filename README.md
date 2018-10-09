@@ -2,7 +2,7 @@
 <img src="images/emwss.jpg" width="300" align="right">
 
 
-This is a Chrome Extension for the game Empire Millennium wars to block user chat messages that contain specific text such as a username.
+A Chrome Extension for the game Empire Millennium wars to block user chat messages.
 
 **To Install:**<br>
 Download all of the files retaining directory structure.  You can [download the files as a zip archive by clicking here](https://github.com/sflanders95/EmpireMillenniumChatBlockerChromeExt/archive/master.zip) or use git to make a local clone:
