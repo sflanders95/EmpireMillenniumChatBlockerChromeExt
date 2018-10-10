@@ -2,3 +2,4 @@ theme: jekyll-theme-minimal
 timezone: America/New_York
 title: Empire Millennium Chat Blocker Chrome Extension
 show_downloads: true
+logo: /images/ChatBox.jpeg
