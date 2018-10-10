@@ -24,6 +24,6 @@ To remove the text, click the "Erase" button.
 
 To regain the hidden messages, use Erase function then reload the game (press F5).
 
--
-[MIT Software License](LICENSE) <br>
+---
+[MIT Software License](https://raw.githubusercontent.com/sflanders95/EmpireMillenniumChatBlockerChromeExt/master/LICENSE) <br>
 \<EOF\>
