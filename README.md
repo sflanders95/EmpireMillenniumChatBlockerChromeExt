@@ -14,7 +14,7 @@ Open Chrome and navigate to: [chrome://extensions](chrome://extensions)
 
 Turn Developer mode on: &nbsp; <img src="images/chromeDevModeOn.png" width="100" valign="middle">
 
-Click the "Load Unpacked" button and select the directory where the manifest.json file is that you just downloaded.
+Click the "Load Unpacked" button and select the directory where the manifest.json file is that you just downloaded.  *(if you downloaded the zip file, unzip it so chrome can get to the manifest.json file.)*
 
 Now open the [Empire Millennium Wars Game](https://empiremillenniumwars.com/ 'a goodgamesstudios crappy product').
 
