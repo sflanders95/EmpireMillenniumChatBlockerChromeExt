@@ -24,4 +24,6 @@ To remove the text, click the "Erase" button.
 
 To regain the hidden messages, use Erase function then reload the game (press F5).
 
+-
+[MIT Software License](LICENSE) <br>
 \<EOF\>
