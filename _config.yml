@@ -1,4 +1,6 @@
-# theme: jekyll-theme-minimal
+# note theme: jekyll-theme-minimal is still needed eventhough I have my own default.html master file.
+# it is needed because all of the CSS and other supporting files are loaded with this "theme:" statement
+theme: jekyll-theme-minimal
 timezone: America/New_York
 title: Empire Millennium Chat Blocker Chrome Extension
 show_downloads: true
