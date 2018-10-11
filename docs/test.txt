@@ -4,3 +4,6 @@ title: Test Layout Page with Text file
 ---
 *** {{ page.title }}
 You are here, hopefully inside of _layouts/default.html.
+
+
+Filename: test.txt
