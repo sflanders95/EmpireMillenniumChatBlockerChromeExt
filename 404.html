@@ -18,20 +18,23 @@ permalink: /404.html
     </style>
 </head>
 <body>
-<div class="grad">
-    Error: {{ page.title }}
+<div class="grad" style="height:100%">
+    <div>Error: {{ page.title }}</div>
     <hr class="grad" width="60%" align="center">
-    Cannot find the file specified: <span id="PathName">placeholder</span>
+    <div>Cannot find the file specified: <span id="PathName">placeholder</span></div>
     <br>
-    <span id="FullURL"/>
-    <div style="height:60vh;"> &nbsp; </div>
-    <div style="text-align: right; color: #c8c8c8;"><hr class="grad">{{ page.path }} &nbsp; &nbsp; &nbsp; </div>
-<script>
-window.onload(() => {
-    document.getElementById("PathName").innerText = window.location.pathname;
-    document.getElementById("FullURL").innerText = window.location.href;
-});
-</script>
+    <div style="height: 80%;"><pre><span id="FullURL">placeholder</span></pre></div>
+    <div> &nbsp; </div>
+    <hr class="grad">
+    <div style="text-align: right; color: #888;">
+        {{ page.path }} &nbsp; &nbsp; &nbsp; 
+    </div>
 </div>
+<script>
+    window.onload = () => {
+        document.getElementById("PathName").innerText = window.location.pathname;
+        document.getElementById("FullURL").innerText = window.location.href;
+    };
+</script>
 </body>
 </html>
