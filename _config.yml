@@ -7,6 +7,7 @@ show_downloads: true
 logo: images/ChatBox.jpeg
 google_analytics: UA-127176852-1
 favico_url: https://assets-cdn.github.com/favicon.ico
+future: true
 # markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 # testing sln from https://github.community/t5/GitHub-Pages/gitHub-pages-URL-404/m-p/4466#M341
 # thest did not help viewing https://sflanders95.github.io/EmpireMillenniumChatBlockerChromeExt/docs/test.html
