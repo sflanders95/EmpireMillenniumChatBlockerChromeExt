@@ -15,15 +15,22 @@ permalink: /404.html
     div.grad {
         background: linear-gradient(135deg, rgba(255,255,255,1) 0%,rgb(198, 244, 255) 100%); 
     }
+    div.fixed, span.fixed {
+        font-size: smaller;
+        font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace; 
+    }
+    div.vSpace {
+        height: 80%;
+    }
     </style>
 </head>
 <body>
 <div class="grad" style="height:100%">
-    <div>Error: {{ page.title }}</div>
+    <h2>Error: {{ page.title }}</h2>
     <hr class="grad" width="60%" align="center">
-    <div>Cannot find the file specified: <span id="PathName">placeholder</span></div>
+    <div>Cannot find the file specified: <span id="PathName" class="fixed">placeholder</span></div>
     <br>
-    <div style="height: 80%;"><pre><span id="FullURL">placeholder</span></pre></div>
+    <div class="fixed vSpace"><span id="FullURL">placeholder</span></div>
     <div> &nbsp; </div>
     <hr class="grad">
     <div style="text-align: right; color: #888;">
