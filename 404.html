@@ -5,13 +5,33 @@ permalink: /404.html
 ---
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>{{ page.title }}</title>
+    <style>
+    hr.grad {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, #8df, #000, #8df);
+    }
+    div.grad {
+        background: linear-gradient(135deg, rgba(214,249,255,1) 0%,rgba(158,232,250,1) 100%); 
+    }
+    </style>
 </head>
 <body>
-    Error: {{ title }}
-    <hr>
-    Cannot find the file specified.  {{ page.url }}
+<div class="grad">
+    Error: {{ page.title }}
+    <hr class="grad" width="60%">
+    Cannot find the file specified: <span id="PathName">placeholder</span>
     <br>
-    {{ page.path }}
+    <span id="FullURL"/>
+    <div style="height:80vh;"> &nbsp; </div>
+    <div style="text-align: right; color: #c8c8c8;"><hr class="grad">{{ page.path }}</div>
+<script>
+window.onload(() => {
+    document.getElementById("PathName").innerText = window.location.pathname;
+    document.getElementById("FullURL").innerText = window.location.href;
+});
+</script>
+</div>
 </body>
 </html>
