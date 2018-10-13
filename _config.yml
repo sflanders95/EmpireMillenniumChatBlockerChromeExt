@@ -6,7 +6,7 @@ title: Empire Millennium Chat Blocker Chrome Extension
 show_downloads: true
 logo: images/ChatBox.jpeg
 google_analytics: UA-127176852-1
-favico_url: https://assets-cdn.github.com/favicon.ico
+favico_url: "https://assets-cdn.github.com/favicon.ico"
 future: true
 # markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 # testing sln from https://github.community/t5/GitHub-Pages/gitHub-pages-URL-404/m-p/4466#M341
