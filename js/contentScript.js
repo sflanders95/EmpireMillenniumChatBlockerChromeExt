@@ -2,21 +2,24 @@
 console.log('ContentScript loading on '+window.host);
 var SettingsKeys = {ignoreText: 'ignoreText', completelyHide: 'completelyHide'};
 var _ChatClass = 'chat__message';
+var sReplDiv = '<div style="font-size: 10px; color: #f66; background-color: #008;"> &nbsp; &nbsp; Content Removed</div>';
 
 window.onload = () => {
+  initVars();
   console.log('ContentScript Activated');
   console.log(getChatParentDiv());
   doWork();
 }
 
-// chrome.runtime.onMessage.addListener(
-//     function(message, callback) {
-//       if (message == “runContentScript”) {
-//         chrome.tabs.executeScript({
-//           file: 'js/contentScript.js'
-//         });
-//       }
-//    });
+function initVars()
+{
+   getSetting(SettingsKeys.ignoreText, function(val) {
+      if (val == 'err') saveSetting (SettingsKeys.ignoreText, "");
+   });
+   getSetting(SettingsKeys.completelyHide, function(val) {
+      if (val == 'err') saveSetting (SettingsKeys.ignoreText, false);
+   });
+}
 
 function getChatParentDiv() {
   var aryChat = document.getElementsByClassName('chat__message');
@@ -32,14 +35,16 @@ function doWork()
 {
     var timerID = null;
     timerID = setInterval(function() {
-      getSetting(SettingsKeys.ignoreText, function(val) { 
-        console.log('Timer Event::_ignoreText = '+val+' '+new Date().getMilliseconds());
-        removeItems(val);
+      getSetting(SettingsKeys.ignoreText, function(txt) { 
+        getSetting(SettingsKeys.completelyHide, (hide) => { 
+           console.log('Timer Event::_ignoreText = '+txt+' | completelyHide = '+hide+'  '+new Date().getMilliseconds());
+           removeItems(txt, hide);
+         } );
       } ); 
     }, 7000);
 }
 
-function removeItems(ignoreText)
+function removeItems(ignoreText, hide)
 {
   if ((ignoreText) && (ignoreText.length > 3))
   {
@@ -48,8 +53,13 @@ function removeItems(ignoreText)
     {
         if (parent.children[i].outerHTML.toUpperCase().indexOf(ignoreText.toUpperCase()) > 0)
         {
-            parent.removeChild(parent.children[i]);
-            removeItems(ignoreText);
+            if (hide) {
+              parent.removeChild(parent.children[i]);
+            } else {
+              parent.children[i].outerHTML = sReplDiv;
+            }
+            removeItems(ignoreText, hide);
+            parent.scrollIntoView(false);
             i = 300000; // reset counter for recursion exit as an item was just removed.
         }
     }
@@ -76,7 +86,12 @@ function getSetting(lKey, fn)
     }
     else {
       console.log('Data retrieval failed');
-      fn('err2');
+      fn('err');
     }
   });
+}
+
+function saveSetting(lKey, lVal)
+{
+  chrome.storage.local.set({[lKey]: lVal} ); //, function(){} );
 }
