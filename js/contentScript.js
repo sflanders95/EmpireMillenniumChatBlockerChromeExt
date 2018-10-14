@@ -41,28 +41,35 @@ function doWork()
            removeItems(txt, hide);
          } );
       } ); 
-    }, 7000);
+    }, 1500);
 }
 
 function removeItems(ignoreText, hide)
 {
   if ((ignoreText) && (ignoreText.length > 3))
   {
+    var changed = false;
+    hide = false; // override setting, currently a bug if hiding a message, corresponding alliance or global child gets hidden too.
     var parent = getChatParentDiv();
     for (var i = 0; i < parent.children.length; i++)
     {
-        if (parent.children[i].outerHTML.toUpperCase().indexOf(ignoreText.toUpperCase()) > 0)
+        var spanUserName = parent.children[i].children[0].children[0];
+        //console.log('i'+spanUserName.nodeName+spanUserName.innerText.toUpperCase()+"=="+ignoreText.toUpperCase()+" : "+
+        //   spanUserName.innerText.toUpperCase().indexOf(ignoreText.toUpperCase()) );
+
+        if (spanUserName.innerText.toUpperCase().indexOf(ignoreText.toUpperCase()) >= 0)
         {
             if (hide) {
-              parent.removeChild(parent.children[i]);
+              parent.children[i].visible = false; // parent.removeChild(parent.children[i]);
             } else {
-              parent.children[i].outerHTML = sReplDiv;
+              // parent.children[i].outerHTML = sReplDiv;
+              spanUserName.nextSibling.nextSibling.innerHTML = '<span style="color:#f00">Content Removed.</span>';
             }
-            removeItems(ignoreText, hide);
-            parent.scrollIntoView(false);
-            i = 300000; // reset counter for recursion exit as an item was just removed.
+            //changed = true;
         }
     }
+    // commented out.  Scrolling is /hinky/
+    //if (changed) { parent.children[parent.children.length-1].scrollIntoView(false); }
   }
 }
 

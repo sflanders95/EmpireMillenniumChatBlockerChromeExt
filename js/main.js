@@ -21,8 +21,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function saveData() {
-  saveSetting(SettingsKeys.ignoreText, document.getElementById(SettingsKeys.ignoreText).value);
-  saveSetting(SettingsKeys.completelyHide, document.getElementById(SettingsKeys.completelyHide).checked);
+  // saveSetting(SettingsKeys.ignoreText, document.getElementById(SettingsKeys.ignoreText).value);
+  var txt = document.getElementById(SettingsKeys.ignoreText).value;
+  var hide = document.getElementById(SettingsKeys.completelyHide).checked || false;
+  saveSetting(SettingsKeys.ignoreText, txt);
+  saveSetting(SettingsKeys.completelyHide, hide);
+  //document.getElementById("Status").innerText = "Settings saved: {" + SettingsKeys.ignoreText + ": \"" +txt + "\", " +
+  //    SettingsKeys.completelyHide + ": " + hide + "}";
+  document.getElementById("Status").innerText = "Settings saved: { " + SettingsKeys.ignoreText + ": \"" +txt + "\", " +
+      SettingsKeys.completelyHide + ": Not Implemented }";
+  window.setTimeout(() => {
+    document.getElementById("Status").value = "";
+  }, 10000);
   loadData();
 }
 
@@ -34,7 +44,7 @@ function loadData() {
 function clearData()
 {
   document.getElementById("ignoreText").value = '';
-  document.getElementById("completelyHide").checked = true;
+  document.getElementById("completelyHide").checked = false;
   saveData();
 }
 
