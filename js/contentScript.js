@@ -1,13 +1,14 @@
 'use strict';
 console.log('ContentScript loading on '+window.host);
-var SettingsKeys = {ignoreText: 'ignoreText', completelyHide: 'completelyHide'};
+var gDebug = false; // Global var accessible in console.
+var SettingsKeys = {ignoreText: 'ignoreText', completelyHide: 'completelyHide', Debug: 'DEBUG'};
 var _ChatClass = 'chat__message';
 var sReplDiv = '<div style="font-size: 10px; color: #f66; background-color: #008;"> &nbsp; &nbsp; Content Removed</div>';
 
 window.onload = () => {
   initVars();
   console.log('ContentScript Activated');
-  console.log(getChatParentDiv());
+  if (gDebug) console.log(getChatParentDiv());
   doWork();
 }
 
@@ -18,6 +19,10 @@ function initVars()
    });
    getSetting(SettingsKeys.completelyHide, function(val) {
       if (val == 'err') saveSetting (SettingsKeys.ignoreText, false);
+   });
+   getSetting(SettingsKeys.Debug, (val) => {
+    if (val == 'err') saveSetting (SettingsKeys.ignoreText, false);
+    else gDebug = val || false;
    });
 }
 
@@ -37,7 +42,8 @@ function doWork()
     timerID = setInterval(function() {
       getSetting(SettingsKeys.ignoreText, function(txt) { 
         getSetting(SettingsKeys.completelyHide, (hide) => { 
-           console.log('Timer Event::_ignoreText = '+txt+' | completelyHide = '+hide+'  '+new Date().getMilliseconds());
+           if (gDebug) 
+             console.log('Timer Event::_ignoreText = '+txt+' | completelyHide = '+hide+'  '+new Date().getMilliseconds());
            removeItems(txt, hide);
          } );
       } ); 

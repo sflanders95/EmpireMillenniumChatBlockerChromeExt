@@ -26,6 +26,8 @@
     "content_scripts": [
       {
         "matches": ["file:///Users/*", 
+          "https://empiremillenniumwars.com/*",
+          "https://game.empiremillenniumwars.com/*",
           "https://empiremillenniumwars.ggs-emw.com/*"],
         "js": ["js/contentScript.js"],
         "all_frames": true
