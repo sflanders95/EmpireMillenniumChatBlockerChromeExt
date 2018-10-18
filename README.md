@@ -24,7 +24,7 @@ To remove the text, click the "Erase" button.  It's a good idea to use the Erase
 
 To regain the hidden messages, use Erase function then reload the game (press F5).
 
-# Versions:
+### Version History:
 
 Oct 18, 2018 - Changed to allow for new URL for the game.  empiremillenniumwars.ggs-emw.com has been chanegd to game.empiremillenniumwars.com.  Possibly to allow for cross iframe javascript now that the site utilizes one domain "empiremillenniumwars.com".
 
