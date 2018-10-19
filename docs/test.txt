@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Test Layout Page with Text file
-permalink: /EmpireMillenniumChatBlockerChromeExt/test/
 ---
 *** {{ page.title }}
 You are here, hopefully inside of _layouts/default.html.
