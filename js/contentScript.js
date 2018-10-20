@@ -1,12 +1,12 @@
 'use strict';
 console.log('ContentScript loading on '+window.host);
-var gDebug = false; // Global var accessible in console.
+var gDebug = true; // Global var accessible in console.
 var SettingsKeys = {ignoreText: 'ignoreText', completelyHide: 'completelyHide', Debug: 'DEBUG'};
 var _ChatClass = 'chat__message';
 var sReplDiv = '<div style="font-size: 10px; color: #f66; background-color: #008;"> &nbsp; &nbsp; Content Removed</div>';
 
 window.onload = () => {
-  initVars();
+  //initVars();
   console.log('ContentScript Activated');
   if (gDebug) console.log(getChatParentDiv());
   doWork();
