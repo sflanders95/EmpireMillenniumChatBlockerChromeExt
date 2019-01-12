@@ -1,5 +1,7 @@
 'use strict';
 
+
+function commentedOut() {
 console.log('Empire Millennium chat blocker background.js has started.');
 var _DEBUG, _ChatClass;
 
@@ -74,6 +76,9 @@ function getSetting(lKey, fn)
   });
 }
 
+} // end Commented Out
+
+
 function LOG(str) {
   console.log('[BCM]: ' + str);
   if (_DEBUG) {
@@ -86,3 +91,4 @@ function LOG(str) {
   }
 }
 /* END COMMON */
+

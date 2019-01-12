@@ -1,110 +1,67 @@
-'use strict';
-console.log('ContentScript loading on '+window.host);
-var gDebug = false; // Global var accessible in console.
-var SettingsKeys = {ignoreText: 'ignoreText', completelyHide: 'completelyHide', Debug: 'DEBUG'};
-var _ChatClass = 'chat__message';
-var sReplDiv = '<div style="font-size: 10px; color: #f66; background-color: #008;"> &nbsp; &nbsp; Content Removed</div>';
+/* To install for chrome, right click on map and select "Inspect.
+in the new screens, find the console.  Paste the contents of this file
+and press enter.  You can then close the "Inspect" screens.  A new
+Bookmark window will be in top left.  refresh browser to completely 
+remove it.    */
+/* *** Bookmarks, change gBM below to fit your needs (no comma after last item) *** */
+/* var gBM = { "A Group": [757,578], 
+            "B Group": [130,750], 
+            "C Group": [560,755], 
+            "D Group": [235,130], 
+            "Lunch": [19,294],
+            "PvP 01": [15,257],
+            "PvP Deus 15s": [463,490],
+            "PvP Xany hive": [278,514],
+            "4 LTPers": [178,618],
+            "PvP [RUR]": [655,672],
+            "PvP [RUR]2": [643,680],
+            "[D1*]XBromX": [270,265,"277M Level 19"],
+            "Solo": [245,106],
+            "NewLoc":[696,504],
+            "OldSpot":[246,128]
+};*/
 
-window.onload = () => {
-  // initVars();
-  console.log('ContentScript Activated');
-  if (gDebug) console.log(getChatParentDiv());
-  doWork();
+
+function mv2(x, y) {
+console.log(Date().toString() + ' Move Command Received: ('+x+','+y+')');
+var www = document.getElementsByClassName("hud-world-map-bar__coordinates")[0];
+//if (!document.getElementsByClassName("hud-world-map-bar__coordinates")[0]) {return 'Error: Map screen not found';}
+if (!www) {return 'Error: Map screen not found';}
+www = www.children[0];
+www.click();
+setTimeout(()=> {
+  var base=document.getElementsByClassName("screen-coordinates-search__coordinates")[0];
+  if (!base) { return 'Error: base coordinate screen not found.'; }
+  //console.log(base);
+  valx=base.children[1].children[1].children[0].children[0].value;
+  if (x>valx) {for (i=valx; i < x; i++) {
+  base.children[1].children[1].children[1].children[0].click(); } }
+  else { for (i=valx; i > x; i--) {
+  base.children[1].children[1].children[1].children[1].click(); } }
+
+  valy=base.children[2].children[1].children[0].children[0].value;
+  if (y>valy) {for (i=valy; i < y; i++) {
+  base.children[2].children[1].children[1].children[0].click(); } }
+  else { for (i=valy; i > y; i--) {
+  base.children[2].children[1].children[1].children[1].click(); } }
+  setTimeout(()=>{
+    document.getElementsByClassName("button flex-direction-row button--size-expand button--style-primary button--shape-rounded button--layout-column")[0].click();
+    }, 200)}
+  , 200);
+return 'Success';
 }
 
-function initVars()
-{
-   getSetting(SettingsKeys.ignoreText, function(val) {
-      if (val == 'err') saveSetting (SettingsKeys.ignoreText, "");
-   });
-   getSetting(SettingsKeys.completelyHide, function(val) {
-      if (val == 'err') saveSetting (SettingsKeys.ignoreText, false);
-   });
-   getSetting(SettingsKeys.Debug, (val) => {
-    if (val == 'err') saveSetting (SettingsKeys.ignoreText, false);
-    else gDebug = val || false;
-   });
+var aEMWContentScriptLoaded=true;
+/* MAIN: */
+if (window.self !== window.top) { /* Only if inside of iFrame */
+  chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+      console.log(Date().toString() + ' message: ' + (JSON.stringify(request) || 'null'));
+      if (request.x) {
+        sendResponse(mv2(request.x,request.y) || 'Unknown Error');
+      }
+    });
 }
 
-function getChatParentDiv() {
-  var aryChat = document.getElementsByClassName('chat__message');
-  var returnVal = 'not changed';
-  if (aryChat[0])
-      returnVal = aryChat[0].parentNode.parentNode;
-  else
-      returnVal = 'err';
-  return returnVal;
-}
-
-function doWork()
-{
-    var timerID = null;
-    timerID = setInterval(function() {
-      getSetting(SettingsKeys.ignoreText, function(txt) { 
-        getSetting(SettingsKeys.completelyHide, (hide) => { 
-           if (gDebug) 
-             console.log('Timer Event::_ignoreText = '+txt+' | completelyHide = '+hide+'  '+new Date().getMilliseconds());
-           removeItems(txt, hide);
-         } );
-      } ); 
-    }, 1500);
-}
-
-function removeItems(ignoreText, hide)
-{
-  if ((ignoreText) && (ignoreText.length > 3))
-  {
-    var changed = false;
-    hide = false; // override setting, currently a bug if hiding a message, corresponding alliance or global child gets hidden too.
-    var parent = getChatParentDiv();
-    for (var i = 0; i < parent.children.length; i++)
-    {
-        var spanUserName = parent.children[i].children[0].children[0];
-        //console.log('i'+spanUserName.nodeName+spanUserName.innerText.toUpperCase()+"=="+ignoreText.toUpperCase()+" : "+
-        //   spanUserName.innerText.toUpperCase().indexOf(ignoreText.toUpperCase()) );
-
-        if (spanUserName.innerText.toUpperCase().indexOf(ignoreText.toUpperCase()) >= 0)
-        {
-            if (hide) {
-              parent.children[i].visible = false; // parent.removeChild(parent.children[i]);
-            } else {
-              // parent.children[i].outerHTML = sReplDiv;
-              spanUserName.nextSibling.nextSibling.innerHTML = '<span style="color:#f00">Content Removed.</span>';
-            }
-            //changed = true;
-        }
-    }
-    // commented out.  Scrolling is /hinky/
-    //if (changed) { parent.children[parent.children.length-1].scrollIntoView(false); }
-  }
-}
-
-/* Usage:
- *   getSetting('keyIdentifier', (val) => { do something with val; } ); 
- */
-function getSetting(lKey, fn) 
-{
-  chrome.storage.local.get(lKey, (result) => {
-    if (result) {
-        //console.log('getSetting('+lKey+'): '+ JSON.stringify(result) );
-        //console.log('getSetting('+lKey+'): '+ result.ignoreText );
-        switch (lKey) {  /* Security Exception: cannot use: eval('result.'+SettingsKeys.ignoreText) */
-          case SettingsKeys.ignoreText:
-            fn(result.ignoreText); break;
-          case SettingsKeys.completelyHide:
-            fn(result.completelyHide); break;
-          default:
-            fn('err');
-        }
-    }
-    else {
-      console.log('Data retrieval failed');
-      fn('err');
-    }
-  });
-}
-
-function saveSetting(lKey, lVal)
-{
-  chrome.storage.local.set({[lKey]: lVal} ); //, function(){} );
-}
+// log from background script.
+console.log(Date().toString() + ' contentScript');

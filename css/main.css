@@ -12,7 +12,68 @@ select::-moz-focus-inner,
 input[type="file"] > input[type="button"]::-moz-focus-inner {
   outline: none !important; }
 
-body { 
+zbody { 
   background-color: #C8C8C8; 
   font-family: Arial, Helvetica, sans-serif;
 }
+
+#begin____________________________NEW_CSS________________________ {x:1;}
+
+body {
+    font-family: Roboto, system-ui, sans-serif;
+    background: #0a0;
+}
+
+.main-outer {
+    width: 400px;
+    margin: 2px;
+    border-radius: 5px;
+    background-image: linear-gradient(to bottom right, #fff, #ccc);
+}
+
+.main-inner {
+    padding: 3px;
+}
+
+.main-title {
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.main-about-text {
+    width: 99%;
+    margin-top: 10px;
+    text-align: right;
+    font-size: large;
+}
+
+.bookmarkRow {
+    display: inline-flex;
+    vertical-align:top;
+    width: 100%;
+    padding: 4px 2px 2px 2px;
+    height: 12px;
+}
+
+.del {
+    cursor: pointer;
+    width: 15px;
+}
+
+.bookmarkName {
+    width: 90%;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.statusBar {
+  width: 100%;
+}
+.statusMsg{
+  width: 100%;
+  background-image: linear-gradient(to bottom right, #fff, #cfc);
+}
+
+#end_______________________________NEW_CSS________________________ {x:1;}

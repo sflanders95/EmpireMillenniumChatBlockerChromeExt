@@ -1,17 +1,36 @@
-<html>
-    <head>
-        <script src="../js/main.js" lang="javascript"></script>
-        <link rel="stylesheet" href="../css/main.css"/>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <script src="../js/main.js" lang="javascript"></script>
+  <link rel="stylesheet" href="../css/main.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css"></link>
+</head>
 <body>
 <form id="ChatSettingsForm">
 
-    <div>Text to ignore:</div>
+<div class="main-outer">
+  <div class="main-inner">
+    <div class="main-title">Empire Millennium Wars Addons</div>
+    <div class="main-about-text" id="divLang">🇺🇸</div>
+
+
+    <div>New Bookmark:</div>
     <div>
-    <input type="text" id="ignoreText" size="35" placeholder="Text to Ignore must be 3 or more letters." pattern=".{0}|.{3,}">
+      <input type="text" id="txtBMName" size="30" placeholder="Enter bookmark name" title="Bookmark Name" 
+        class="" zpattern=".{0}|.{3,}">
+      <input type="text" id="txtCoordX" size="8" placeholder="" title="X Coordinate" 
+        class="" zpattern=".{0}|.{3,}">
+      <input type="text" id="txtCoordY" size="8" placeholder="" title="Y Coordinate" 
+        classs="" zpattern=".{0}|.{3,}">
+      <button id="btnAdd" title="Add to list" class="">Add To List</button>
     </div>
     
-    <div>
+    <div id="divBookmarkList" class=""></div>
+
+    <div id="divRawData" class=""></div>
+
+    <!--div>
     <label for="completelyHide" 
            title="Completely hide the text or show a placeholder that the message was hidden. Not Implemented">Completely Hide</span>
     <input type="checkbox" id="completelyHide" value="Completely Hide" title="not implemented">
@@ -22,14 +41,19 @@
     <input type=button id="btnSave" value="Save">
     <input type=button id="btnClear" value="Erase">
     </div>
+    -->
+</div>
+</div>
+
 
     <br/><br/>
+    <input type=button id="btnTest" value="test"><br/>
+    
     <div>
-       <div id="Status"></div>
+       <div id="divStatus"></div>
     </div>
-
-    <div id="DEBUG">
-      <div id="LOG"><h2>Debug Log</h2></div>
+    <div id="divDEBUG">
+      <div id="divLOG"><h2>Debug Log</h2></div>
     </div>
 
 </form>
