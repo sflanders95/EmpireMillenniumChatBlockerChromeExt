@@ -3,11 +3,22 @@
 theme: jekyll-theme-minimal
 timezone: America/New_York
 title: Empire Millennium Chrome Extension
+description: >- # this means to ignore newlines until "baseurl:"
+  Generic Chrome Extension utility for the game Empire Millennium Wars.
 show_downloads: true
 logo: images/ChatBox.jpeg
 google_analytics: UA-127176852-1
 favicon_url: "https://assets-cdn.github.com/favicon.ico"
 future: true
+destination: ./_site
+github_username:  sflanders95
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - 'manifest.json'
+  - 'package.sh'
+  - 'serve.sh'
+  - 'tmp'
 # markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 # testing sln from https://github.community/t5/GitHub-Pages/gitHub-pages-URL-404/m-p/4466#M341
 # thest did not help viewing https://sflanders95.github.io/EmpireMillenniumChatBlockerChromeExt/docs/test.html

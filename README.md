@@ -5,9 +5,9 @@
 A Chrome Extension for the game Empire Millennium wars to block specific user's chat messages.
 
 **To Install:**<br>
-Download all of the files retaining directory structure.  You can [download the files as a zip archive by clicking here](https://github.com/sflanders95/EmpireMillenniumChatBlockerChromeExt/archive/master.zip) or use git to make a local clone:
+Download all of the files retaining directory structure.  You can [download the files as a zip archive by clicking here](https://github.com/sflanders95/EmpireMillenniumChromeExt/archive/master.zip) or use git to make a local clone:
 ```sh
-git clone https://github.com/sflanders95/EmpireMillenniumChatBlockerChromeExt
+git clone https://github.com/sflanders95/EmpireMillenniumChromeExt
 ```
 
 Open Chrome and navigate to: [chrome://extensions](chrome://extensions)
@@ -25,6 +25,7 @@ To remove the text, click the "Erase" button.  It's a good idea to use the Erase
 To regain the hidden messages, use Erase function then reload the game (press F5).
 
 ### Version History:
+Jan 12, 2019 - Removed chat blocking aspect of the code.  Replaced it with a way to use bookmarks in-game.
 
 Oct 18, 2018 - Changed to allow for new URL for the game.  empiremillenniumwars.ggs-emw.com has been chanegd to game.empiremillenniumwars.com.  Possibly to allow for cross iframe javascript now that the site utilizes one domain "empiremillenniumwars.com".
 
@@ -35,5 +36,5 @@ Sept 30, 2018 - Revised to allow for new iframe structure of the game.
 Sept 26, 2018 - Epoch
 
 ---
-[MIT Software License](https://raw.githubusercontent.com/sflanders95/EmpireMillenniumChatBlockerChromeExt/master/LICENSE) <br>
+[MIT Software License](https://raw.githubusercontent.com/sflanders95/EmpireMillenniumChromeExt/master/LICENSE) <br>
 \<EOF\>
