@@ -1,4 +1,4 @@
-# EmpireMillenniumChatBlockerChromeExt
+# EmpireMillenniumChromeExt
 <img src="images/emwss.jpg" width="300" align="right">
 
 

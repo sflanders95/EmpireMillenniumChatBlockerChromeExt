@@ -1,4 +1,5 @@
 'use strict';
+const _Version=1;
 var _DEBUG;
 var _DataStore = { lang: "en",
                    bookmarks: [{"name": "Center Green", x:384, y:384}] }; /* contents of {name: "display name", x: 0, y: 0} */
@@ -25,9 +26,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Add Page Events.
   document.getElementById('btnAdd').addEventListener('click', addBookmark);
-  document.getElementById('btnTest').addEventListener('click', (x, y) =>{ x=640;y=640;moveToLocation(x,y);});
+  document.getElementById('btnTest').addEventListener('click', checkVersion);
 
   displayBookmarks();
+  gInit();
 });
 
 function moveToLocation(bmIdx) {
@@ -164,6 +166,34 @@ function LOG(str) {
     lEntry.innerText = str;
     document.getElementById('divLOG').appendChild(lEntry);
   }
+}
+
+function VersionLoad(obj) {
+  setStatus('iFrame Loaded ' + obj);
+  // if(this.status == 200){
+
+  //   setStatus('Version check passed');
+  // } else {
+  //   setStatus('Err ocurred during Version Check');
+  // }
+}
+function checkVersion() {
+  // var client = new XMLHttpRequest();
+  // client.onload = VersionLoad;
+  // client.open("GET", 'http://127.0.0.1:4000/docs/ver.html');
+  // client.send();
+  var ifr = cdefs('<iframe id="ver" src="http://127.0.0.1:4000/docs/ver.html" style="width: 1px; height: 1px;"></iframe>');
+  ift.addEventListener('load', (e)=>{VersionLoad(e.target)});
+}
+
+function gInit() {
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-127176852-1', 'auto');
+ga('send', 'pageview', '/EMWChromeExt.html');
+setStatus('end');
 }
 /*****************************************************************************
  * End: Logging Functions                                                    *

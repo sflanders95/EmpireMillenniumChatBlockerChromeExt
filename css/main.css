@@ -76,4 +76,7 @@ body {
   background-image: linear-gradient(to bottom right, #fff, #cfc);
 }
 
+#Version{
+  display: hidden;
+}
 #end_______________________________NEW_CSS________________________ {x:1;}

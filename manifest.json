@@ -9,6 +9,7 @@
       "persistent": false,
       "all_frames": true
     },
+    "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
     "browser_action": {
       "matches": ["https://game.empiremillenniumwars.com/*"],
       "default_title": "Empire Millennium Wars Bookmarks",
