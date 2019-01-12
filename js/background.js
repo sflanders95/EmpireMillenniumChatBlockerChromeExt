@@ -1,31 +1,18 @@
 'use strict';
-
+var _DEBUG=false;
 
 function commentedOut() {
 console.log('Empire Millennium chat blocker background.js has started.');
-var _DEBUG, _ChatClass;
+var _ChatClass;
 
-// if (chrome)
-// chrome.runtime.onInstalled.addListener(function() {
-//   init();
-// });
-// else
 window.onload = () => { init(); }
 
 function init() {
   _DEBUG = false;
   _ChatClass = 'chat__message';
-
-  // getSetting(SettingsKeys.ignoreText, (val) => { _ignoreText = val; } ); 
-  // getSetting(SettingsKeys.completelyHide, (val) => { _completelyHide = val; } ); 
-
-  // TODO: if domain is empiremillenniumwars.ggs-emw.com
-  // add the following background listener.
   LOG('Background STARTED');
   doWork();
 }
-
-
 
 function doWork()
 {
@@ -41,46 +28,10 @@ function getChatParentDiv() {
   var aryChat = document.getElementsByClassName(_ChatClass);
   return aryChat[0].parentNode.parentNode || 'error';
 }
-
-
-/* BEGIN COMMON */
-var SettingsKeys = {ignoreText: 'ignoreText', completelyHide: 'completelyHide'};
-
-function saveSetting(lKey, lVal)
-{
-  chrome.storage.local.set({[lKey]: lVal} ); //, function(){} );
-}
-
-/* Usage:
- *   getSetting('keyIdentifier', (val) => { do something with val; } ); 
- */
-function getSetting(lKey, fn) 
-{
-  chrome.storage.local.get(lKey, (result) => {
-    if (result) {
-        LOG('getSetting('+lKey+'): '+ JSON.stringify(result) );
-        LOG('getSetting('+lKey+'): '+ result.ignoreText );
-        switch (lKey) {  /* Security Exception: cannot use: eval('result.'+SettingsKeys.ignoreText) */
-          case SettingsKeys.ignoreText:
-            fn(result.ignoreText); break;
-          case SettingsKeys.completelyHide:
-            fn(result.completelyHide); break;
-          default:
-            fn('err');
-        }
-    }
-    else {
-      LOG('Data retrieval failed');
-      fn('err2');
-    }
-  });
-}
-
-} // end Commented Out
-
+} /* end Commented Out */
 
 function LOG(str) {
-  console.log('[BCM]: ' + str);
+  console.log('[EMMCE]: ' + str);
   if (_DEBUG) {
     if (document.getElementById('LOG'))
     {
@@ -90,5 +41,5 @@ function LOG(str) {
     }
   }
 }
-/* END COMMON */
+
 
