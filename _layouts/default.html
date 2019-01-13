@@ -32,7 +32,6 @@
           <script>
           $('#img2').toggle();
           function swap(){ 
-            console.log(new Date().toISOString() + 'here');
             $('#img1').fadeOut(4000, ()=>{$('#img1').fadeIn(4000)});
             $('#img2').fadeIn(4000, ()=>{$('#img2').fadeOut(4000)});
           }
