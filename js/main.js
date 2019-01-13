@@ -105,12 +105,16 @@ function moveToLocation(bmIdx) {
   LOG('Bookmark Event: '+bmIdx+' ' + JSON.stringify(bmObj));
   if (!bmObj) { setStatus('Bookmark not found'); return null; }
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, {"x":bmObj.x,"y":bmObj.y}, function(response) {
-      setStatus(response);
-      console.log(new Date().toISOString() + 'TestBtn: response=' + response||'null');
-      if (response && response.toString().indexOf('Err') == -1)
-        window.close();
-    });
+    if (tabs[0].url.toLowerCase().indexOf('empiremillenniumwars.com') == -1) {
+       setStatus('Error: Not On empiremillenniumwars.com website'); return false;
+    } else {
+      chrome.tabs.sendMessage(tabs[0].id, {"x":bmObj.x,"y":bmObj.y}, function(response) {
+        setStatus(response);
+        console.log(new Date().toISOString() + 'TestBtn: response=' + response||'null');
+        if (response && response.toString().indexOf('Err') == -1)
+          window.close();
+      });
+    }
   });
 }
 
@@ -299,20 +303,6 @@ function cdefs(s){
   var d = document.createElement('div');d.innerHTML=s.trim();return d.firstChild;
 }
 
-// var _statusTimer;
-// function setStatus(str) {
-//   LOG('statusmsg: ' + str);
-//   _statusTimer = (clearTimeout(_statusTimer) || null);
-//   var newmsg = cdefs('<div class="statusMsg"></div>');
-//   newmsg.innerText = str;
-//   var o = document.getElementById('divStatus');
-//   o.insertBefore(newmsg, o.firstChild); /* tested: works even if no children */
-//   _statusTimer = setTimeout(()=>{
-//     while (o.firstChild) { o.removeChild(o.firstChild); }
-//     o.innerText = ''; 
-//     }, 5000);
-// }
-//this.parentNode.removeChild(this)
 function setStatus(str) {
   LOG('statusmsg: ' + str);
   var newmsg = cdefs('<div class="statusMsg"></div>');
