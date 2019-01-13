@@ -8,56 +8,76 @@
   <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css"></link>
 </head>
 <body>
-<form id="EmpireMillenniumWarsForm">
+<aform id="EmpireMillenniumWarsForm">
 
 <div class="main-outer">
   <div class="main-inner">
     <div class="main-title">Empire Millennium Wars Addons</div>
     <div class="main-about-text" id="divLang">🇺🇸</div>
+  </div>
+</div>
 
+<div id="panel1">
+<div class="main-outer">
+  <div class="main-inner">
 
-    <div>New Bookmark:</div>
-    <div>
-      <input type="text" id="txtBMName" size="30" placeholder="Enter bookmark name" title="Bookmark Name" 
-        class="" zpattern=".{0}|.{3,}">
-      <input type="text" id="txtCoordX" size="8" placeholder="" title="X Coordinate" 
-        class="" zpattern=".{0}|.{3,}">
-      <input type="text" id="txtCoordY" size="8" placeholder="" title="Y Coordinate" 
-        classs="" zpattern=".{0}|.{3,}">
-      <button id="btnAdd" title="Add to list" class="">Add To List</button>
-    </div>
+    <div class="inline">  
+    <div id="divNewBookmark" class="heading">New Bookmark:</div>
+      <div class="right toggleBtn"><span id="btnOpenBulk" class="link pointer" 
+          title="Close Bulk Input">Toggle Bulk Input</span></span></div>
+    </div>      
     
+    <div>
+      <input type="text" id="txtBMName" maxlength="20" size="20" placeholder="Enter bookmark name" 
+        title="Bookmark Name (at least 3 chars)" class="inputs" pattern=".{3,20}" required>
+      <label for="txtCoordX">X:</label><input type="text" id="txtCoordX" maxlength="3" size="5" 
+        placeholder="0" title="X Coordinate" class="inputs" pattern="[0-9]{1,3}" required>
+      <label for="txtCoordY">Y:</label><input type="text" id="txtCoordY" maxlength="3" size="5" 
+        placeholder="0" title="Y Coordinate" class="inputs" pattern="[0-9]{1,3}" required> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <button id="btnAdd" title="Add to list" class="btn">Add To List</button>
+    </div>
+  </div>
+</div>
+
+<div class="main-outer">
+  <div class="main-inner">
+    <div id="divBookmarks" class="heading">Bookmarks:</div>
     <div id="divBookmarkList" class=""></div>
-
     <div id="divRawData" class=""></div>
-
-    <!--div>
-    <label for="completelyHide" 
-           title="Completely hide the text or show a placeholder that the message was hidden. Not Implemented">Completely Hide</span>
-    <input type="checkbox" id="completelyHide" value="Completely Hide" title="not implemented">
-    </div>
-
-    <div>
-    <br>
-    <input type=button id="btnSave" value="Save">
-    <input type=button id="btnClear" value="Erase">
-    </div>
-    -->
+</div>
 </div>
 </div>
 
+<div id="panel2">
+<div class="main-outer">
+  <div class="main-inner">
 
-    <br/><br/>
-    <input type=button id="btnTest" value="test"><br/>
+    <div class="inline">  
+    <div id="divBulkEditLbl" class="heading">Bulk Edit:</div>  
+      <div class="right toggleBtn"><span id="btnCloseBulk" class="link pointer" 
+          title="Close Bulk Input">Toggle Bulk Input</span></span></div>
+    </div>
+
+    <textarea id="txtAreaBulk" class="bulkInput"></textarea>
+    <div class="right">
+    <button id="btnBulkSave" class="btn right" title="Save Bulk Data">💾  Save Bulk Data</button>
+    </div>
+</div>
+</div>
+</div>
+
+    <br/>
+    <!-- <input type=button id="btnTest" value="test"><br/> -->
     
-    <div>
-       <div id="divStatus"></div>
-    </div>
+    <div id="divNewVersion" class="newVersion"></div>
+
+    <div id="divStatus" class="statusBar"></div>
+ 
     <div id="divDEBUG">
       <div id="divLOG"><h2>Debug Log</h2></div>
     </div>
-    <!--script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-127176852-1"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config', 'UA-127176852-1');</script>
---></form>
+</aform>
+<iframe id="gtag" src="https://sflanders95.github.io/EmpireMillenniumChromeExt/EMWChromeExtVer" style="width:2px;height:3px;position:absolute;left:-50px"></iframe>
+
 </body>
 </html>

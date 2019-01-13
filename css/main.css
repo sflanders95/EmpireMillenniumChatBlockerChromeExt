@@ -1,31 +1,10 @@
-*, html, body, button, input, textarea, select {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
-
-button:focus,
-a:focus, a:active,
-button::-moz-focus-inner,
-input[type="reset"]::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
-select::-moz-focus-inner,
-input[type="file"] > input[type="button"]::-moz-focus-inner {
-  outline: none !important; }
-
-zbody { 
-  background-color: #C8C8C8; 
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-#begin____________________________NEW_CSS________________________ {x:1;}
-
 body {
     font-family: Roboto, system-ui, sans-serif;
     background: #0a0;
 }
 
 .main-outer {
-    width: 400px;
+    width: 430px;
     margin: 2px;
     border-radius: 5px;
     background-image: linear-gradient(to bottom right, #fff, #ccc);
@@ -43,9 +22,19 @@ body {
 
 .main-about-text {
     width: 99%;
-    margin-top: 10px;
+    margin-top: -20px;
     text-align: right;
     font-size: large;
+}
+
+.right {
+    text-align: right;
+}
+
+.heading {
+    width: 100%;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .bookmarkRow {
@@ -69,14 +58,68 @@ body {
 }
 
 .statusBar {
-  width: 100%;
-}
-.statusMsg{
-  width: 100%;
-  background-image: linear-gradient(to bottom right, #fff, #cfc);
+    width: 100%;
 }
 
-#Version{
-  display: hidden;
+.statusMsg{
+    width: 100%;
+    background-image: linear-gradient(to bottom right, #cfc, #9c9);
 }
-#end_______________________________NEW_CSS________________________ {x:1;}
+
+.newVersion {
+    width: 100%;
+    font-size: 12pt;
+    background-image: linear-gradient(to bottom right, #fcc, #c99);
+}
+
+.btn {
+    background-image: linear-gradient(to bottom, #7cd87c 0%, #61a661 100%);
+    border-color: #3e8f3e;
+    border-radius: 5px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.inputs:invalid:required {
+    background-color: #fdd;
+}
+.inputs:valid {
+    background-color: #dfd;
+}
+
+.bulkpanel { 
+    zposition: absolute;
+    zwidth: 90%;
+    ztop: 20px;
+    zleft: 20px;
+    background-image: linear-gradient(to bottom, #dfd 0%, #afa 90%);
+}
+
+.bulkInput {
+    font-family: PT Mono, Roboto, system-ui, sans-serif;
+    font-size: 10pt;
+    width: 98%;
+    height: 430px;
+    margin: 2px;
+    border-radius: 5px;
+    background-image: linear-gradient(to bottom right, #fff, #cfc);
+}
+
+.inline {
+  display: inline-flex;
+  width: 100%;
+}
+
+.toggleBtn {
+  width: 200px;
+  vertical-align:top;
+  margin-top: -2px;
+}

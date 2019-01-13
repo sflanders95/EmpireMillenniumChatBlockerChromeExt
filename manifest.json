@@ -6,6 +6,7 @@
     "permissions": ["activeTab", "declarativeContent", "storage", "*://*/* "],
     "background": {
       "scripts": ["js/background.js"],
+      "matches": ["https://game.empiremillenniumwars.com/*"],
       "persistent": false,
       "all_frames": true
     },

@@ -23,7 +23,7 @@ remove it.    */
 
 
 function mv2(x, y) {
-console.log(Date().toString() + ' Move Command Received: ('+x+','+y+')');
+console.log(new Date().toISOString() + ' Move Command Received: ('+x+','+y+')');
 var www = document.getElementsByClassName("hud-world-map-bar__coordinates")[0];
 //if (!document.getElementsByClassName("hud-world-map-bar__coordinates")[0]) {return 'Error: Map screen not found';}
 if (!www) {return 'Error: Map screen not found';}
@@ -56,7 +56,7 @@ var aEMWContentScriptLoaded=true;
 if (window.self !== window.top) { /* Only if inside of iFrame */
   chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-      console.log(Date().toString() + ' message: ' + (JSON.stringify(request) || 'null'));
+      console.log(new Date().toISOString() + ' message: ' + (JSON.stringify(request) || 'null'));
       if (request.x) {
         sendResponse(mv2(request.x,request.y) || 'Unknown Error');
       }
@@ -64,4 +64,7 @@ if (window.self !== window.top) { /* Only if inside of iFrame */
 }
 
 // log from background script.
-console.log(Date().toString() + ' contentScript');
+console.log(new Date().toISOString() + ' contentScript');
+/* setInterval(()=>{ console.log(new Date().toISOString() + ' contentScript'); }, 5000); */
+
+
