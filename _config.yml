@@ -7,7 +7,9 @@ title: Empire Millennium Chrome Extension
 description: >- # this means to ignore newlines until "baseurl:"
   Generic Chrome Extension utility for the game Empire Millennium Wars.
 show_downloads: true
-logo: images/ChatBox.jpeg
+# image is for seo image, logo is in _default template. (left logo for back compatibility)
+image: images/logo.jpg 
+logo: images/logo.jpg
 google_analytics: UA-127176852-1
 favicon_url: "https://assets-cdn.github.com/favicon.ico"
 future: true
