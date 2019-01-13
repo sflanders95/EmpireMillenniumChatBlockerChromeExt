@@ -355,8 +355,8 @@ function VersionLoad() {
 }
 
 function checkVersion() {
-  //var url='https://sflanders95.github.io/EmpireMillenniumChromeExt/EMWChromeExtVer';
-  var url='http://127.0.0.1:4000/EMWChromeExtVer';
+  var url='https://sflanders95.github.io/EmpireMillenniumChromeExt/EMWChromeExtVer';
+  // var url='http://127.0.0.1:4000/EMWChromeExtVer';
   var client = new XMLHttpRequest();
   client.onload = VersionLoad;
   client.open("GET", url);
