@@ -12,6 +12,14 @@ body {
 
 .main-inner {
     padding: 3px;
+    overflow: hidden;
+    max-height: 500px;
+}
+
+.scrolly { 
+    overflow-y: scroll;
+    max-height: 300px;
+    overflow-x: hidden;
 }
 
 .main-title {
@@ -35,6 +43,7 @@ body {
     width: 100%;
     font-size: 12px;
     font-weight: bold;
+    background-image: linear-gradient(to bottom right, #fff, #ddd);
 }
 
 .bookmarkRow {

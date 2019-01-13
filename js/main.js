@@ -9,7 +9,7 @@ var sDefaults = {
             "flagHelpText": "US English",
             "btnAdd" : "💾 Add Bookmark",
             "btnAddHelpText" : "💾 Enter desired x and y coordinates and click here to save",
-            "deleteIconHelpText": "Delete This List",
+            "deleteIconHelpText": "Delete This Bookmark",
             "GoToHelpText": "Go to Bookmark",
             "txtBMNameHelpText": "Enter a bookmark name (at least 3 characters)",
             "divNewBookmark": "New Bookmark:",
@@ -17,7 +17,29 @@ var sDefaults = {
             "divBulkEditLbl": "Bulk Edit:",
             "txtCoordXHelpText": "The X Coordinate",
             "txtCoordYHelpText": "The Y Coordinate",
-            "ErrAddingBookmark": "Error Adding Bookmark: check the fields that are red"
+            "ErrAddingBookmark": "Error Adding Bookmark: check the fields that are red",
+            "btnOpenBulk": "Goto Bulk Input", 
+            "btnOpenBulkHelpText": "Open Bulk Input Screen",
+            "btnCloseBulk": "Exit Bulk Input", 
+            "btnCloseBulkHelpText": "Return to Normal Input Screen"
+          },
+    "de": { "flag": "🇩🇪",
+            "flagHelpText": "Deutsche",
+            "btnAdd": "Lesezeichen Erstellen",
+            "btnAddHelpText": "Lesezeichen Erstellen",
+            "deleteIconHelpText": "Entfernen Sie dieses Lesezeichen",
+            "GoToHelpText": "Gehe zu Standort",
+            "txtBMNameHelpText": "Geben Sie einen Lesezeichennamen ein (3 oder mehr Zeichen)",
+            "divNewBookmark": "Neues Lesezeichen:",
+            "divBookmarks": "Lesezeichen:",
+            "divBulkEditLbl": "Massenbearbeitung:",
+            "txtCoordXHelpText": "The X Coordinate",
+            "txtCoordYHelpText": "The Y Coordinate",
+            "ErrAddingBookmark": "Fehler beim Hinzufügen eines Lesezeichens: Überprüfen Sie die roten Felder",
+            "btnOpenBulk": "Massendateneingabe", 
+            "btnOpenBulkHelpText": "Gehen Sie zur Massendateneingabe",
+            "btnCloseBulk": "Hauptbildschirm", 
+            "btnCloseBulkHelpText": "Rückkehr zum Hauptbildschirm"
           }
 }; /* sDefaults :: End String Definitions */
 
@@ -26,6 +48,36 @@ document.addEventListener("DOMContentLoaded", function() {
   setDebug(false);
   LOG('ChromeExt:main.js init()');
   
+  /* Update Labels and helptext based on lang  */
+  resetLangDependentText()
+
+  // Add Page Events.
+  document.getElementById('btnAdd').addEventListener('click', addBookmark);
+  document.getElementById('btnBulkSave').addEventListener('click', bulkSave);
+  document.getElementById('btnOpenBulk').addEventListener('click', toggleBulkScreen);
+  document.getElementById('btnCloseBulk').addEventListener('click', toggleBulkScreen);
+  $('#divLang').click(toggleLang);
+
+  $(document.body).delegate('input:text', 'keypress', function(e) {
+      if (e.which === 13) { e.preventDefault(); addBookmark(); } });
+
+  retrieveJson(()=>{displayBookmarks(); resetLangDependentText();});
+  gooInit();
+  checkVersion();
+  $('#panel2').toggle(); /* toggleBulkScreen(); */
+});
+
+function toggleLang() {
+  if (!_DataStore) return;
+  _DataStore.lang = (_DataStore.lang == 'en') ? 'de' : 'en';
+  storeJson(_DataStore);
+  displayBookmarks();
+  updateBulkScreen();
+  resetLangDependentText();
+  setStatus('Language Changed');
+}
+
+function resetLangDependentText() {
   // Set Language dependent Labels:
   document.getElementById('divLang').innerText = gStr('flag');
   document.getElementById('divLang').title = gStr('flag') + ' ' + gStr('flagHelpText');
@@ -33,25 +85,22 @@ document.addEventListener("DOMContentLoaded", function() {
   document.getElementById('btnAdd').title = gStr('btnAddHelpText');
   document.getElementById('txtBMName').title = gStr('txtBMNameHelpText');
   document.getElementById('txtCoordX').title = gStr('txtCoordXHelpText');
-  document.getElementById('txtCoordY').innerText = gStr('txtCoordYHelpText');
-  document.getElementById('divNewBookmark').title = gStr('divNewBookmark');
+  document.getElementById('txtCoordY').title = gStr('txtCoordYHelpText');
+  document.getElementById('divNewBookmark').innerText = gStr('divNewBookmark');
   document.getElementById('divBookmarks').innerText = gStr('divBookmarks');
   document.getElementById('divBulkEditLbl').innerText = gStr('divBulkEditLbl');
-
-  // Add Page Events.
-  document.getElementById('btnAdd').addEventListener('click', addBookmark);
-  document.getElementById('btnBulkSave').addEventListener('click', bulkSave);
-  document.getElementById('btnOpenBulk').addEventListener('click', toggleBulkScreen);
-  document.getElementById('btnCloseBulk').addEventListener('click', toggleBulkScreen);
-
-  retrieveJson(displayBookmarks);
-  gInit();
-  checkVersion();
-  $('#panel2').toggle(); /* toggleBulkScreen(); */
-});
+  $('#btnOpenBulk').text(gStr('btnOpenBulk'));
+  $('#btnOpenBulk').prop('title', gStr('btnOpenBulkHelpText'));
+  $('#btnCloseBulk').text(gStr('btnCloseBulk'));
+  $('#btnCloseBulk').prop('title', gStr('btnCloseBulkHelpText'));
+}
 
 function moveToLocation(bmIdx) {
   if (!bmIdx) { return false; }
+  /* Todo: get active tab's url and check that instead */
+  // if (location.href.toLowerCase().indexOf('empiremillenniumwars.com') == -1) {
+  //   setStatus('Error: Not On empiremillenniumwars.com website'); return false;
+  // }
   var bmObj = _DataStore.bookmarks[bmIdx] || null;
   LOG('Bookmark Event: '+bmIdx+' ' + JSON.stringify(bmObj));
   if (!bmObj) { setStatus('Bookmark not found'); return null; }
@@ -59,7 +108,7 @@ function moveToLocation(bmIdx) {
     chrome.tabs.sendMessage(tabs[0].id, {"x":bmObj.x,"y":bmObj.y}, function(response) {
       setStatus(response);
       console.log(new Date().toISOString() + 'TestBtn: response=' + response||'null');
-      if (response.toString().indexOf('Err') == -1)
+      if (response && response.toString().indexOf('Err') == -1)
         window.close();
     });
   });
@@ -223,7 +272,7 @@ function getLang() {
 function gStr(sKey, defaultVal){
   var msgs = sDefaults[getLang()] || sDefaults.en;
   var val = msgs[sKey] || defaultVal || '';
-  if (val == '') val = msgs['en'] || defaultVal || sKey; /* still nothing, then try 'en' */
+  if (val == '') val = sDefaults.en[sKey] || defaultVal || sKey; /* still nothing, then try 'en' */
   return val;
 }
 /*****************************************************************************
@@ -314,7 +363,7 @@ function checkVersion() {
   client.send();
 }
 
-function gInit() {
+function gooInit() {
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
