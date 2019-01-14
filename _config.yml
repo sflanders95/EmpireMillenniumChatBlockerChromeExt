@@ -10,6 +10,12 @@ show_downloads: true
 # image is for seo image (meta="og:image"), logo is in _default template. (left logo for back compatibility)
 image: images/logo.jpg 
 logo: images/logo.jpg
+# yet another attempt to get SEO og:image meta tag to auto show up:
+defaults:
+ - scope:
+     path: ""
+   values:
+     image: images/logo.jpg
 google_analytics: UA-127176852-1
 favicon_url: "https://assets-cdn.github.com/favicon.ico"
 future: true
