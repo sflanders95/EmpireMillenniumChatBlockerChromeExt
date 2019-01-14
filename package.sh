@@ -25,3 +25,4 @@ cp html/* $DEST/html
 
 ls -lF $DEST
 set +x
+date
