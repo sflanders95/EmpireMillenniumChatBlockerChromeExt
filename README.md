@@ -25,7 +25,7 @@ If your alliance has a master bookmark file, you can load it by clicking the "To
 If any map artifacts occur in the game, it is the game itself.  Refreshing with F5 is a common necessity for this game, but the bookmarks will remain persistent. 
 
 ### Version History:
-Jan 14, 2019 - Allowed new game's domain to permissions of allowable domains. (empireww3.com)
+Jan 14, 2019 - Ver 1.01 Allowed new game's domain to permissions of allowable domains. (empireww3.com)
 
 Jan 12, 2019 - Removed chat blocking aspect of the code.  Replaced it with a way to use bookmarks in-game.
 

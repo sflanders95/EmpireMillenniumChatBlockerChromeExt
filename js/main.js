@@ -1,5 +1,5 @@
 'use strict';
-const _Version=parseFloat(1.0);
+const _Version=parseFloat(1.01);
 var _DEBUG;
 var _Manifest;
 var _DataStore = { lang: "en",
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
   /* Update Labels and helptext based on lang  */
   resetLangDependentText()
 
-  // Add Page Events.
+  /* Add Page Events.   ***/
   document.getElementById('btnAdd').addEventListener('click', addBookmark);
   document.getElementById('btnBulkSave').addEventListener('click', bulkSave);
   document.getElementById('btnOpenBulk').addEventListener('click', toggleBulkScreen);
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (e.which === 13) { e.preventDefault(); addBookmark(); } });
 
 
-  // Last Steps, load data and draw screen
+  /* Last Steps, load data and draw screen   */
   $.getJSON( "../manifest.json", function( json ) {
        _Manifest = json;
        LOG( "manifest.json loaded: " + json );
@@ -88,7 +88,7 @@ function toggleLang() {
 }
 
 function resetLangDependentText() {
-  // Set Language dependent Labels:
+  /* Set Language dependent Labels: */
   document.getElementById('divLang').innerText = gStr('flag');
   document.getElementById('divLang').title = gStr('flag') + ' ' + gStr('flagHelpText');
   document.getElementById('btnAdd').innerText = gStr('btnAdd');
@@ -120,10 +120,6 @@ function isURLAllowed(sUrl) {
 
 function moveToLocation(bmIdx) {
   if (!bmIdx) { return false; }
-  /* Todo: get active tab's url and check that instead */
-  // if (location.href.toLowerCase().indexOf('empiremillenniumwars.com') == -1) {
-  //   setStatus('Error: Not On empiremillenniumwars.com website'); return false;
-  // }
   var bmObj = _DataStore.bookmarks[bmIdx] || null;
   LOG('Bookmark Event: '+bmIdx+' ' + JSON.stringify(bmObj));
   if (!bmObj) { setStatus('Unknown Error: Bookmark object not found'); return null; }
@@ -162,10 +158,6 @@ function addBookmark() {
   }
 }
 
-// function deleteBookmark(bookmakr_name) {
-//   setStatus('Delete Bookmark ' + bookmakr_name);
-// }
-
 /* Display the list of screens on the left column. */
 function displayBookmarks(jsonData) {
   jsonData = jsonData || _DataStore || newDataObj();
@@ -176,7 +168,7 @@ function displayBookmarks(jsonData) {
   for (var i = 0; i < jsonData.bookmarks.length; i++) {
     var divBMRow = cdefs('<div class="bookmarkRow"></div>');
     divBMList.appendChild(divBMRow);
-    // divScreens.appendChild(divScrRow);
+
     var divDel = cdefs('<div class="del"> ❌ </div>'); /* ❌ ❎ */
     divDel.setAttribute('title', gStr('deleteIconHelpText') + ': ' + jsonData.bookmarks[i].name);
     divDel.setAttribute('bmData', i);
@@ -332,10 +324,10 @@ function setStatus(str) {
   newmsg.innerText = str;
   var o = document.getElementById('divStatus');
   o.insertBefore(newmsg, o.firstChild); /* tested: works even if no children */
-  //$(newmsg).toggle(8000,"linear",()=>{newmsg.parentNode.removeChild(newmsg)});
+  /* $(newmsg).toggle(8000,"linear",()=>{newmsg.parentNode.removeChild(newmsg)}); */
   /* Pause a second, then start timer to finally delete the msg node */
   setTimeout(()=>{$(newmsg).fadeOut(5000,"linear",()=>{newmsg.parentNode.removeChild(newmsg)});}, 1500);
-  //$(newmsg).fadeOut(5000,"linear",()=>{newmsg.parentNode.removeChild(newmsg)});
+  /* $(newmsg).fadeOut(5000,"linear",()=>{newmsg.parentNode.removeChild(newmsg)}); */
 }
 
 function LOG(str) {
@@ -371,7 +363,7 @@ function VersionLoad() {
 
 function checkVersion() {
   var url='https://sflanders95.github.io/EmpireMillenniumChromeExt/EMWChromeExtVer';
-  // var url='http://127.0.0.1:4000/EMWChromeExtVer';
+  /* var url='http://127.0.0.1:4000/EMWChromeExtVer'; */
   var client = new XMLHttpRequest();
   client.onload = VersionLoad;
   client.open("GET", url);
