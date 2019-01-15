@@ -4,6 +4,7 @@
   <meta charset="utf-8"/>
   <script src="../js/jquery-3.3.1.min.js" lang="javascript"></script>
   <script src="../js/main.js" lang="javascript"></script>
+  <script src="../js/options.js" lang="javascript"></script>
   <link rel="stylesheet" href="../css/main.css"/>
   <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css"></link>
 </head>
@@ -17,7 +18,7 @@
   </div>
 </div>
 
-<div id="panel1">
+<div id="pnlBookMkMain">
 <div class="main-outer">
   <div class="main-inner">
 
@@ -44,11 +45,11 @@
     <div id="divBookmarks" class="heading">Bookmarks:</div>
     <div id="divBookmarkList" class="scrolly"></div>
     <div id="divRawData" class=""></div>
-</div>
+  </div>
 </div>
 </div>
 
-<div id="panel2">
+<div id="pnlBookMkBulk">
 <div class="main-outer">
   <div class="main-inner">
 
@@ -65,6 +66,21 @@
 </div>
 </div>
 </div>
+
+<div id="pnlGenSettings">
+<style>input.udFontSize{font-size:14px;width:50px;}</style>
+<div class="main-outer">
+  <div class="main-inner">
+    <div id="divGeneralLbl" class="heading">General Settings:</div>
+    <fieldset>
+      <legend>Chat Font Size:</legend>
+      <input id="udFontSize" class="udFontSize" type="number" min="6" max="48" step="1" value="10">
+      <button id="btnFontSize">Set Font Size</button>
+    </fieldset>
+    
+  </div>
+</div>
+</div><!-- pnlGenSettings -->
 
     <br/>
     <!-- <input type=button id="btnTest" value="test"><br/> -->

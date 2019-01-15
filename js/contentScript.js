@@ -51,17 +51,41 @@ setTimeout(()=> {
 return 'Success';
 }
 
+/* if size = -1, return existing mod (or 10) if it exists. Otherwise 
+ * perform a 'set' command */ 
+function changeChatFontSize(size) {
+  var oStyle = document.getElementById('CustomStyle0x7B3');
+  if (size == -1) { 
+    return (!oStyle) ? 10 : oStyle.innerText.match(/\d+/)[0];
+  }
+  else {
+    if (!oStyle) {
+      oStyle = cdefs('<style id="CustomStyle0x7B3"></style>');
+      document.body.appendChild(oStyle);
+    }
+    oStyle.innerText = '.chat__container{font-size:' + size + 'px;}';
+    return size;
+  }
+}
+
+function cdefs(s){
+  var d = document.createElement('div');d.innerHTML=s.trim();return d.firstChild;
+}
+
 var aEMWContentScriptLoaded=true;
 /* MAIN: */
-if (window.self !== window.top) { /* Only if inside of iFrame */
+//if (window.self !== window.top) { /* Only if inside of iFrame */
   chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
       console.log(new Date().toISOString() + ' message: ' + (JSON.stringify(request) || 'null'));
       if (request.x) {
         sendResponse(mv2(request.x,request.y) || 'Unknown Error');
+      } 
+      else if (request.chatFontSize) {
+        sendResponse(changeChatFontSize(request.chatFontSize) || 'Unknown Error');
       }
     });
-}
+//}
 
 // log from background script.
 console.log(new Date().toISOString() + ' contentScript');

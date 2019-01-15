@@ -18,13 +18,15 @@ Click the "Load Unpacked" button and select the directory where the manifest.jso
 
 Now open the [Empire Millennium Wars Game](https://empiremillenniumwars.com/ 'a goodgamesstudios crappy product').
 
-After installing the plugin, a new icon <img src="images/Actions-process-stop-icon16.png" valign="middle"> should have been created at the top right of the chrome window.  The Hover text over the icon will say "Empire Millennium Wars Bookmarks".  Click it to open the main window.  You can start saving bookmarks immediately.  Clicking the add bookmark button will add the new item to the list.  If an error occurs, the bottom of the window will show a message of what happened.
+After installing the plugin, a new icon <img src="images/Actions-process-stop-icon16.png" valign="middle"> should have been created at the top right of the chrome window.  The Hover text over the icon will say "Empire Millennium Wars Bookmarks".  Click it to open the main window.  You can start saving bookmarks immediately.  Clicking the add bookmark button will add the new item to the list.  If an error occurs, the bottom of the window will show a message of what happened.  *Note: To update the extension, you can either click on the extensions "remove" button and start over, or unzip the new version into the same spot and click the circular Arrow to refresh.*
 
 If your alliance has a master bookmark file, you can load it by clicking the "Toggle Bulk Input" link near the top.  Paste the text and click save.  This page is finicky and the text must be very precise as this text must be parsed.
 
 If any map artifacts occur in the game, it is the game itself.  Refreshing with F5 is a common necessity for this game, but the bookmarks will remain persistent. 
 
 ### Version History:
+Jan 14, 2019 - Allowed new game's domain to permissions of allowable domains. (empireww3.com)
+
 Jan 12, 2019 - Removed chat blocking aspect of the code.  Replaced it with a way to use bookmarks in-game.
 
 Oct 18, 2018 - Changed to allow for new URL for the game.  empiremillenniumwars.ggs-emw.com has been chanegd to game.empiremillenniumwars.com.  Possibly to allow for cross iframe javascript now that the site utilizes one domain "empiremillenniumwars.com".

@@ -5,16 +5,23 @@
     "description": "Generic html/javascript tools to extend the game.",
     "permissions": ["activeTab", "declarativeContent", "storage", "*://*/* "],
     "background": {
+      "background_comment": "This section was used for the chat blocking. This feature is currently tabled.",
       "scripts": ["js/background.js"],
       "matches": ["https://game.empiremillenniumwars.com/*",
-                  "https://game.empireww3.com/*"],
+                  "https://game.empireww3.com/*",
+                  "https://empireww3.com/",
+                  "https://empiremillenniumwars.com/*",
+                  "https://static.lp.goodgamestudios.com/*"],
       "persistent": false,
       "all_frames": true
     },
     "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
     "browser_action": {
       "matches": ["https://game.empiremillenniumwars.com/*",
-                  "https://game.empireww3.com/*"],
+                  "https://game.empireww3.com/*",
+                  "https://empireww3.com/",
+                  "https://empiremillenniumwars.com/*",
+                  "https://static.lp.goodgamestudios.com/*"],
       "default_title": "Empire Millennium Wars Bookmarks",
       "default_popup": "html/main.html",
       "scripts": ["js/main.js",
@@ -33,14 +40,18 @@
     "content_scripts": [
       {
         "matches": ["https://game.empiremillenniumwars.com/*",
-                    "https://game.empireww3.com/*"],
+                    "https://game.empireww3.com/*",
+                    "https://empireww3.com/",
+                    "https://empiremillenniumwars.com/*",
+                    "https://static.lp.goodgamestudios.com/*"],
         "js": ["js/contentScript.js"],
         "all_frames": true,
-        "del_matches": ["file:///Users/*", 
+        "to_b_del_matches": ["file:///Users/*", 
           "https://empiremillenniumwars.com/*",
           "https://game.empiremillenniumwars.com/*",
           "https://game.empireww3.com/*",
-          "https://empiremillenniumwars.ggs-emw.com/*"]
+          "https://empiremillenniumwars.ggs-emw.com/*",
+          "https://static.lp.goodgamestudios.com/*"]
       }
     ],
     "manifest_version": 2

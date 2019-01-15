@@ -1,6 +1,7 @@
 'use strict';
 const _Version=parseFloat(1.0);
 var _DEBUG;
+var _Manifest;
 var _DataStore = { lang: "en",
                    bookmarks: [{"name": "Center Green", x:384, y:384}] }; /* contents of [{name: "display name", x: 0, y: 0} */
 /* US🇺🇸 france🇫🇷 germany🇩🇪 Mexico🇲🇽 */
@@ -61,10 +62,19 @@ document.addEventListener("DOMContentLoaded", function() {
   $(document.body).delegate('input:text', 'keypress', function(e) {
       if (e.which === 13) { e.preventDefault(); addBookmark(); } });
 
+
+  // Last Steps, load data and draw screen
+  $.getJSON( "../manifest.json", function( json ) {
+       _Manifest = json;
+       LOG( "manifest.json loaded: " + json );
+    });
   retrieveJson(()=>{displayBookmarks(); resetLangDependentText();});
   gooInit();
   checkVersion();
-  $('#panel2').toggle(); /* toggleBulkScreen(); */
+  /* Each Panel is it's own Screen.  To start, turn off other screens */
+  //$('#pnlBookMkMain').toggle(); 
+  $('#pnlBookMkBulk').fadeOut();
+  $('#pnlGenSettings').fadeOut(); 
 });
 
 function toggleLang() {
@@ -95,6 +105,19 @@ function resetLangDependentText() {
   $('#btnCloseBulk').prop('title', gStr('btnCloseBulkHelpText'));
 }
 
+/* Is the active tab one of the ones we pay attention to? */
+function isURLAllowed(sUrl) {
+  sUrl = sUrl.toLowerCase();
+  var validUrls = _Manifest.browser_action.matches;
+  var r = false;
+  for (var i = 0; i < validUrls.length; i++) {
+    /* setStatus('sUrl: ' + sUrl);
+    setStatus('manifest: ' + validUrls[i].replace('*', '').toLowerCase()); */
+    r = r || (sUrl.indexOf(validUrls[i].replace('*', '').toLowerCase()) != -1);
+  } 
+  return r;
+}
+
 function moveToLocation(bmIdx) {
   if (!bmIdx) { return false; }
   /* Todo: get active tab's url and check that instead */
@@ -103,13 +126,13 @@ function moveToLocation(bmIdx) {
   // }
   var bmObj = _DataStore.bookmarks[bmIdx] || null;
   LOG('Bookmark Event: '+bmIdx+' ' + JSON.stringify(bmObj));
-  if (!bmObj) { setStatus('Bookmark not found'); return null; }
+  if (!bmObj) { setStatus('Unknown Error: Bookmark object not found'); return null; }
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    if (tabs[0].url.toLowerCase().indexOf('empiremillenniumwars.com') == -1) {
-       setStatus('Error: Not On empiremillenniumwars.com website'); return false;
+    if (!isURLAllowed(tabs[0].url)) {
+       LOG('Error: Not on authorized url'); return false;
     } else {
       chrome.tabs.sendMessage(tabs[0].id, {"x":bmObj.x,"y":bmObj.y}, function(response) {
-        setStatus(response);
+        setStatus('main.js: response to move: ' + response);
         console.log(new Date().toISOString() + 'TestBtn: response=' + response||'null');
         if (response && response.toString().indexOf('Err') == -1)
           window.close();
@@ -119,8 +142,8 @@ function moveToLocation(bmIdx) {
 }
 
 function toggleBulkScreen() {
-  $('#panel2').toggle({duration:500, easing: "swing"});
-  $('#panel1').toggle({duration:500, easing: "swing"});
+  $('#pnlBookMkBulk').toggle({duration:500, easing: "swing"});
+  $('#pnlBookMkMain').toggle({duration:500, easing: "swing"});
 }
 
 function addBookmark() {
@@ -310,7 +333,9 @@ function setStatus(str) {
   var o = document.getElementById('divStatus');
   o.insertBefore(newmsg, o.firstChild); /* tested: works even if no children */
   //$(newmsg).toggle(8000,"linear",()=>{newmsg.parentNode.removeChild(newmsg)});
-  $(newmsg).fadeOut(5000,"linear",()=>{newmsg.parentNode.removeChild(newmsg)});
+  /* Pause a second, then start timer to finally delete the msg node */
+  setTimeout(()=>{$(newmsg).fadeOut(5000,"linear",()=>{newmsg.parentNode.removeChild(newmsg)});}, 1500);
+  //$(newmsg).fadeOut(5000,"linear",()=>{newmsg.parentNode.removeChild(newmsg)});
 }
 
 function LOG(str) {
