@@ -39,7 +39,8 @@
     },
     "content_scripts": [
       {
-        "matches": ["https://game.empiremillenniumwars.com/*",
+        "matches": ["file://*",
+                    "https://game.empiremillenniumwars.com/*",
                     "https://game.empireww3.com/*",
                     "https://empireww3.com/",
                     "https://empiremillenniumwars.com/*",

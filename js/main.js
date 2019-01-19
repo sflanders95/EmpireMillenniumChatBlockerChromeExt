@@ -58,7 +58,8 @@ document.addEventListener("DOMContentLoaded", function() {
   document.getElementById('btnOpenBulk').addEventListener('click', toggleBulkScreen);
   document.getElementById('btnCloseBulk').addEventListener('click', toggleBulkScreen);
   $('#divLang').click(toggleLang);
-
+  $('#divSettings').click(toggleSettings);
+  
   $(document.body).delegate('input:text', 'keypress', function(e) {
       if (e.which === 13) { e.preventDefault(); addBookmark(); } });
 
@@ -85,6 +86,17 @@ function toggleLang() {
   updateBulkScreen();
   resetLangDependentText();
   setStatus('Language Changed');
+}
+function toggleSettings() {
+  if ($('#pnlGenSettings').css('display') == 'none') {
+    $('#pnlBookMkMain').fadeOut(); 
+    $('#pnlBookMkBulk').fadeOut();
+    $('#pnlGenSettings').fadeIn(); 
+  } else {
+    $('#pnlBookMkMain').fadeIn(); 
+    /* $('#pnlBookMkBulk').fadeOut(); */
+    $('#pnlGenSettings').fadeOut(); 
+  }
 }
 
 function resetLangDependentText() {

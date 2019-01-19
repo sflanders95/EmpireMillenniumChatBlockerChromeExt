@@ -23,9 +23,29 @@ body {
 }
 
 .main-title {
+    display: inline-block;
+    width: 87%;
     font-size: 16px;
     text-align: center;
     font-weight: bold;
+}
+
+.main-language-icon {
+    display: inline-flex;
+    width: 5%;
+    text-align: right;
+    font-size: large;
+    cursor: pointer;
+}
+
+.main-settings-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 7px;
+    background-image: url("../images/settings.png");
+    background-size: 16px 16px;
+    cursor: pointer;
 }
 
 .main-about-text {
@@ -122,13 +142,17 @@ body {
     background-image: linear-gradient(to bottom right, #fff, #cfc);
 }
 
-.inline {
-  display: inline-flex;
-  width: 100%;
+.inline-flex {
+    display: inline-flex;
+    width: 48%;
 }
 
 .toggleBtn {
-  width: 200px;
-  vertical-align:top;
-  margin-top: -2px;
+    width: 200px;
+    vertical-align:top;
+    margin-top: -2px;
+}
+
+.grayGradient {
+    background-image: linear-gradient(to bottom right, #fff, #ccc);
 }
