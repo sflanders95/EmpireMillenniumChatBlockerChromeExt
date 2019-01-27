@@ -22,6 +22,8 @@ After installing the plugin, a new icon <img src="images/Actions-process-stop-ic
 
 If your alliance has a master bookmark file, you can load it by clicking the "Toggle Bulk Input" link near the top.  Paste the text and click save.  This page is finicky and the text must be very precise as this text must be parsed.
 
+What to expect.  You will run into instances where clicking on a bookmark results in "Unknown Object".  Unfortunately I see this a lot.  Refreshing the game seems to remedy all issues I've found with this extension, even the chat logging feature.
+
 If any map artifacts occur in the game, it is the game itself.  Refreshing with F5 is a common necessity for this game, but the bookmarks will remain persistent. 
 
 ### Version History:
